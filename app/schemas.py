@@ -1,5 +1,8 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, conint, ValidationError
 from datetime import datetime
+from typing import Annotated
+from pydantic.functional_validators import AfterValidator
+
 
 
 class UserCreate(BaseModel):
@@ -33,8 +36,21 @@ class Post(PostBase):
     owner_id: int
     owner: UserOut
 
+class PostOut(BaseModel):
+    Post: Post
+    votes: int
 
 
+def is_binary_int(value: int) -> int:
+    if value not in (0, 1):
+        raise ValueError(f"value must be 0 or 1")
+    return value
+
+
+
+class Vote(BaseModel):
+    post_id: int
+    dir: Annotated[int, AfterValidator(is_binary_int)]
 
 
 
