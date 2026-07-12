@@ -29,6 +29,7 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True) , server_default=text('now()'), nullable=False)
 
     posts: Mapped[List["Post"]] = relationship(back_populates="owner", cascade="all, delete-orphan")
+    phone_number: Mapped[str] = mapped_column()
  
 class Vote(Base):
     __tablename__ = "votes"
