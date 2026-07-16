@@ -2,12 +2,13 @@ from pydantic import BaseModel, EmailStr, conint, ValidationError
 from datetime import datetime
 from typing import Annotated
 from pydantic.functional_validators import AfterValidator
-
+from pydantic_extra_types.phone_numbers import PhoneNumber
 
 
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
+    phone_number: PhoneNumber
 
 class UserOut(BaseModel):
     id: int
