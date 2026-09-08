@@ -93,7 +93,7 @@ jobs:
     steps:
       - name: pulling git repo
         uses: actions/checkout@v7
-      - name: deploying to heroku
+      - name: deploying to ubuntu server
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.PROD_HOST }}
